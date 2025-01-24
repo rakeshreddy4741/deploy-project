@@ -21,11 +21,8 @@ app.config['JWT_COOKIE_CSRF_PROTECT'] = False
 ADMIN_USERNAME = os.getenv('ADMIN_USERNAME')
 ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
 
-# Add this near the top of the file with other configurations
-PROJECT_PATHS = {
-    'portfolio': '/home/rakesh/Documents/Projects/portfolio-web/build.sh',
-    # Add more projects and their build script paths
-}
+# Load project paths from environment variables
+PROJECT_PATHS = json.loads(os.getenv('PROJECT_PATHS', '{}'))
 
 @app.route('/')
 def index():
