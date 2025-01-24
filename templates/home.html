@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <span>Rakesh Vavilala's Dashboard</span>
+        </div>
+        <div class="user-menu">
+            <div class="dropdown">
+                <button class="dropdown-toggle">
+                    <i class="fas fa-user-circle"></i>
+                    <span>{{ current_user }}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="{{ url_for('logout') }}">
+                        <i class="fas fa-sign-out-alt"></i> Sign Out
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Active Projects</h1>
+            <p>Monitoring and managing deployed applications</p>
+        </div>
+
+        {% if error %}
+        <div class="error-card">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>{{ error }}</span>
+        </div>
+        {% endif %}
+
+        <div class="projects-grid">
+            {% for process in processes %}
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>{{ process.name }}</h3>
+                    <span class="status-badge {{ process.status.lower() }}">
+                        {{ process.status }}
+                    </span>
+                </div>
+                <div class="project-content">
+                    <div class="project-stats">
+                        <div class="stat">
+                            <i class="fas fa-microchip"></i>
+                            <span>CPU Usage: {{ process.cpu }}</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-memory"></i>
+                            <span>Memory: {{ process.memory }}</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>Runtime: {{ process.uptime }}</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-redo"></i>
+                            <span>Restarts: {{ process.restarts }}</span>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        {% if process.status.lower() == 'online' %}
+                            <button class="action-btn build-btn" onclick="handleAction('{{ process.id }}', 'build')">
+                                <i class="fas fa-sync"></i>
+                                Build & Deploy
+                            </button>
+                            <button class="action-btn restart-btn" onclick="handleAction('{{ process.id }}', 'restart')">
+                                <i class="fas fa-redo"></i>
+                                Restart
+                            </button>
+                            <button class="action-btn stop-btn" onclick="handleAction('{{ process.id }}', 'stop')">
+                                <i class="fas fa-stop-circle"></i>
+                                Stop
+                            </button>
+                        {% else %}
+                            <button class="action-btn start-btn" onclick="handleAction('{{ process.id }}', 'start')">
+                                <i class="fas fa-play-circle"></i>
+                                Start
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.dropdown-toggle').addEventListener('click', function() {
+            this.parentElement.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelector('.dropdown').classList.remove('active');
+            }
+        });
+
+        async function handleAction(projectName, action) {
+            try {
+                const response = await fetch(`/project/${action}/${projectName}`, {
+                    method: 'POST'
+                });
+                if (response.ok) {
+                    // Refresh the page to show updated status
+                    window.location.reload();
+                } else {
+                    alert('Action failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Action failed. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html> 

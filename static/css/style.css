@@ -1,0 +1,556 @@
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --danger-color: #dc2626;
+    --success-color: #16a34a;
+    --background-color: #f1f5f9;
+    --card-background: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+}
+
+/* Login Page Styles */
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background: var(--card-background);
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-header i {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.login-header h1 {
+    margin: 1rem 0 0.5rem;
+    color: var(--text-primary);
+}
+
+.login-header p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.input-icon {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 1rem;
+    color: var(--text-secondary);
+    pointer-events: none;
+    font-size: 1rem;
+}
+
+.input-icon input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    line-height: 1.5;
+}
+
+.input-icon input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.input-icon input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Navigation Styles */
+.main-nav {
+    background: var(--card-background);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.nav-brand i {
+    font-size: 1.5rem;
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: var(--card-background);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    display: none;
+    min-width: 150px;
+}
+
+.dropdown.active .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+
+.dropdown-menu a:hover {
+    background-color: var(--background-color);
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.dashboard-header {
+    margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+    margin: 0 0 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dashboard-header p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    background: var(--card-background);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 0;
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.project-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-badge.online {
+    background-color: #dcfce7;
+    color: var(--success-color);
+}
+
+.status-badge.stopped {
+    background-color: #fee2e2;
+    color: var(--danger-color);
+}
+
+.status-badge.errored {
+    background-color: #fef3c7;
+    color: #d97706;
+}
+
+.project-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.project-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 0.75rem;
+    border-top: 1px solid var(--background-color);
+    padding-top: 1.5rem;
+    min-width: 0;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--background-color);
+    min-width: 0;
+}
+
+.stat i {
+    color: var(--primary-color);
+    font-size: 1.125rem;
+    width: 20px;
+    text-align: center;
+}
+
+.stat span {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.error-card {
+    background-color: #fee2e2;
+    color: var(--danger-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+    line-height: normal;
+    height: 45px;
+    box-sizing: border-box;
+}
+
+.form-group input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
+    vertical-align: middle;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.error {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.process-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.process-table th,
+.process-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.process-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.process-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logout-btn {
+    padding: 8px 16px;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+.project-details {
+    display: contents;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.detail-item i {
+    color: var(--primary-color);
+    font-size: 1.125rem;
+    width: 20px;
+}
+
+.project-actions {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--background-color);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.action-btn {
+    width: 100%;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: all 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.build-btn {
+    background-color: var(--success-color);
+    color: white;
+    grid-column: span 2;
+}
+
+.build-btn:hover {
+    background-color: #15803d;
+}
+
+.restart-btn {
+    background-color: #eab308;
+    color: white;
+}
+
+.restart-btn:hover {
+    background-color: #ca8a04;
+}
+
+.stop-btn {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.stop-btn:hover {
+    background-color: #b91c1c;
+}
+
+.start-btn {
+    background-color: var(--success-color);
+    color: white;
+    grid-column: 1 / -1;
+}
+
+.start-btn:hover {
+    background-color: #15803d;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;  /* Single column on mobile */
+        gap: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .dashboard-container {
+        padding: 0 1rem;
+        margin: 1rem auto;
+    }
+
+    .project-stats {
+        grid-template-columns: 1fr;  /* Stack stats vertically on mobile */
+        gap: 0.5rem;
+    }
+
+    .project-actions {
+        grid-template-columns: 1fr;  /* Stack buttons vertically on mobile */
+        gap: 0.5rem;
+    }
+
+    .build-btn {
+        grid-column: auto;  /* Reset grid span */
+    }
+
+    .action-btn {
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .nav-brand {
+        font-size: 1rem;
+    }
+
+    .main-nav {
+        padding: 0.75rem 1rem;
+    }
+
+    .project-card {
+        padding: 1rem;
+    }
+
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .status-badge {
+        align-self: flex-start;
+    }
+
+    .stat {
+        padding: 0.75rem;
+    }
+
+    .stat span {
+        font-size: 0.85rem;
+    }
+}
+
+/* For very small screens */
+@media screen and (max-width: 360px) {
+    .dashboard-container {
+        padding: 0 0.5rem;
+    }
+
+    .project-card {
+        padding: 0.75rem;
+    }
+
+    .stat {
+        padding: 0.5rem;
+    }
+
+    .action-btn {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+}
