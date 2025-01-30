@@ -121,7 +121,7 @@ def project_action(action, project_id):
             # Execute build script
             print(f"Running build script: {build_script}")
             result = subprocess.run(['bash', build_script], capture_output=True, text=True)
-            
+            print(f"Build result: {result}")
             if result.returncode != 0:
                 print(f"Build failed: {result.stderr}")
                 return jsonify({'status': 'error', 'message': 'Build failed'}), 500
